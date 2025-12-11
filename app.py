@@ -29,6 +29,19 @@ def add_student():
     age = request.form['age']
     grade = request.form['grade']
     
+    # connection = sqlite3.connect('instance/students.db')
+    # cursor = connection.cursor()
+
+    # RAW Query
+    # db.session.execute(
+    #     text("INSERT INTO student (name, age, grade) VALUES (:name, :age, :grade)"),
+    #     {'name': name, 'age': age, 'grade': grade}
+    # )
+    # db.session.commit()
+    # query = f"INSERT INTO student (name, age, grade) VALUES ('{name}', {age}, '{grade}')"
+    # cursor.execute(query)
+    # connection.commit()
+    # connection.close()
 
     # fixed 
     db.session.execute(
@@ -41,6 +54,9 @@ def add_student():
 
 @app.route('/delete/<string:id>') 
 def delete_student(id):
+    # RAW Query
+    # db.session.execute(text(f"DELETE FROM student WHERE id={id}"))
+
     # fixed
     db.session.execute(
         text("DELETE FROM student WHERE id=:id"),
@@ -56,6 +72,9 @@ def edit_student(id):
         name = request.form['name']
         age = request.form['age']
         grade = request.form['grade']
+
+        # RAW Query
+        # db.session.execute(text(f"UPDATE student SET name='{name}', age={age}, grade='{grade}' WHERE id={id}"))
         
         # fixed
         db.session.execute(
@@ -65,6 +84,9 @@ def edit_student(id):
         db.session.commit()
         return redirect(url_for('index'))
     else:
+        # RAW Query
+        # student = db.session.execute(text(f"SELECT * FROM student WHERE id={id}")).fetchone()
+
         # fixed
         student = db.session.execute(
             text("SELECT * FROM student WHERE id=:id"),
