@@ -2,7 +2,7 @@
 // Fungsi untuk membuka koneksi ke database SQLite3
 function connectDB() {
     // Membuka koneksi ke database SQLite
-    $db = new SQLite3('students.db'); // Ganti dengan path yang sesuai
+    $db = new SQLite3(__DIR__ . '/students.db'); // Ganti dengan path yang sesuai
     
     if (!$db) {
         echo "Koneksi gagal";

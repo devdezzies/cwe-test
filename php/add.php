@@ -4,6 +4,7 @@ include 'app.php'; // Menyertakan file koneksi database
 
 // Mengecek apakah form sudah disubmit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     $name = $_POST['name'];
     $age = $_POST['age'];
     $grade = $_POST['grade'];

@@ -60,14 +60,18 @@
                         // $students = selectStudents();
                         if ($students) {
                             foreach ($students as $student) {
+                                $id = sanitize($student['id']);
+                                $name = sanitize($student['name']);
+                                $age = sanitize($student['age']);
+                                $grade = sanitize($student['grade']);
                                 echo "<tr>
-                                    <td>" . $student['id'] . "</td>
-                                    <td>" . $student['name'] . "</td>
-                                    <td>" . $student['age'] . "</td>
-                                    <td>" . $student['grade'] . "</td>
+                                    <td>" . $id . "</td>
+                                    <td>" . $name. "</td>
+                                    <td>" . $age . "</td>
+                                    <td>" . $grade . "</td>
                                     <td>
-                                        <a href='edit.php?id=" . $student['id'] . "' class='btn btn-update'>Edit</a>
-                                        <a href='delete.php?id=" . $student['id'] . "' class='btn btn-delete' onclick='return confirm(\"Yakin ingin menghapus?\")'>Hapus</a>
+                                        <a href='edit.php?id=" . $id . "' class='btn btn-update'>Edit</a>
+                                        <a href='delete.php?id=" . $id . "' class='btn btn-delete' onclick='return confirm(\"Yakin ingin menghapus?\")'>Hapus</a>
                                     </td>
                                 </tr>";
                             }
@@ -85,15 +89,15 @@
     <!-- PHP untuk menambahkan siswa -->
     <?php
     if (isset($_POST['add'])) {
-        $name = $_POST['name'];
-        $age = $_POST['age'];
-        $grade = $_POST['grade'];
+        $name = sanitize($_POST['name']);
+        $age = sanitize($_POST['age']);
+        $grade = sanitize($_POST['grade']);
         addStudent($name, $age, $grade);
     }
 
     // PHP untuk menghapus siswa berdasarkan ID
     if (isset($_GET['delete'])) {
-        $id = $_GET['delete'];
+        $id = sanitize($_GET['delete']);
         deleteStudent($id);
     }
     ?>

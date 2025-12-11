@@ -1,4 +1,8 @@
 <?php
+    function sanitize($data) {
+        return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
+    }
+
     include 'app.php'; 
 
     if (isset($_GET['id'])) {
@@ -7,10 +11,10 @@
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $id = $_POST['id'];
-        $name = $_POST['name'];
-        $age = $_POST['age'];
-        $grade = $_POST['grade'];
+        $id = sanitize($_POST['id']);
+        $name = sanitize($_POST['name']);
+        $age = sanitize($_POST['age']);
+        $grade = sanitize($_POST['grade']);
     
         // Memanggil fungsi untuk update data siswa
         updateStudent($id, $name, $age, $grade);
@@ -35,16 +39,16 @@
         <section class="form-section">
             <h2>Form Update Siswa</h2>
             <form method="POST" action="">
-                <input type="hidden" id="id" name="id" value="<?php echo $students[0]['id']; ?>" required>
+                <input type="hidden" id="id" name="id" value="<?php echo sanitize($students[0]['id']); ?>" required>
 
                 <label for="name">Nama:</label>
-                <input type="text" id="name" name="name" value="<?php echo $students[0]['name']; ?>" required>
+                <input type="text" id="name" name="name" value="<?php echo sanitize($students[0]['name']); ?>" required>
 
                 <label for="age">Usia:</label>
-                <input type="number" id="age" name="age" value="<?php echo $students[0]['age']; ?>" required>
+                <input type="number" id="age" name="age" value="<?php echo sanitize($students[0]['age']); ?>" required>
 
                 <label for="grade">Nilai:</label>
-                <input type="text" id="grade" name="grade" value="<?php echo $students[0]['grade']; ?>" required>
+                <input type="text" id="grade" name="grade" value="<?php echo sanitize($students[0]['grade']); ?>" required>
 
                 <button type="submit">Update Siswa</button>
             </form>
